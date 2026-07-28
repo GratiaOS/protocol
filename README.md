@@ -1,6 +1,6 @@
 # Gratia 🐸
 
-An open protocol for human state transitions.
+Gratia is an open protocol for human state transitions.
 
 It defines a small vocabulary of semantic verbs that can be shared across humans, AI systems, applications, and other software.
 

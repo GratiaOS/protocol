@@ -1,7 +1,7 @@
 {
   "name": "@gratiaos/gratia",
   "version": "0.1.0",
-  "description": "Gratia Protocol — Instruction Set Architecture for human state processing",
+  "description": "Gratia is an open protocol for human state transitions",
   "keywords": [
     "gratia",
     "protocol",
