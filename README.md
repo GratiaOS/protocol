@@ -146,9 +146,9 @@ Grammar: raw → breathe
 
 Every implementation exposes the same interface, but the protocol never specifies _how_ the verb is implemented.
 
-A CLI may print text.
-An LLM may generate a reflection.
-A mobile app may start a breathing exercise.
+A CLI may print text.  
+An LLM may generate a reflection.  
+A mobile app may start a breathing exercise.  
 A robot may dim the lights.
 
 All are valid implementations.
@@ -271,7 +271,7 @@ The goal is to evolve the language carefully while keeping the protocol small, c
 
 ## Vision
 
-Computers standardized computation.
-Networks standardized communication.
-Git standardized collaboration.
+Computers standardized computation.  
+Networks standardized communication.  
+Git standardized collaboration.  
 Gratia aims to standardize human state transitions.
