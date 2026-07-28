@@ -1,0 +1,39 @@
+{
+  "name": "@gratiaos/protocol",
+  "version": "0.1.0",
+  "description": "Gratia Protocol — Instruction Set Architecture for human state processing",
+  "keywords": [
+    "gratia",
+    "protocol",
+    "human-state",
+    "verb",
+    "adapter",
+    "isa"
+  ],
+  "homepage": "https://gratiaos.dev",
+  "bugs": {
+    "url": "https://github.com/gratiaos/protocol/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gratiaos/protocol.git"
+  },
+  "license": "MPL-2.0",
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "vocabulary.json",
+    "patterns.json",
+    "adapters/types.ts"
+  ],
+  "types": "adapters/types.ts",
+  "exports": {
+    ".": {
+      "types": "./adapters/types.ts",
+      "import": "./adapters/types.ts"
+    },
+    "./vocabulary.json": "./vocabulary.json",
+    "./patterns.json": "./patterns.json"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "version": "0.1.0",
+  "name": "@gratiaos/protocol/grammar",
+  "description": "Gratia ISA — Syntactic rules mapping human input to system intents.",
+  "rules": [
+    {
+      "id": "slash_command",
+      "type": "explicit_trigger",
+      "syntax_regex": "^\\/([a-z0-9_-]+)(?:\\s+(.*))?$",
+      "description": "Direct invocation of a pattern or verb via slash command.",
+      "examples": ["/limpezire", "/vision about the Q3 goals", "/cartography"],
+      "resolution": {
+        "action": "lookup",
+        "targets": ["patterns", "vocabulary"],
+        "pass_remaining_as": "context.raw"
+      }
+    },
+    {
+      "id": "symbolic_invocation",
+      "type": "explicit_trigger",
+      "syntax_regex": "^([🫁🧭🐸🌊✨🗺🏗🤝])(?:\\s+(.*))?$",
+      "description": "Invoking a verb or pattern using its exact symbol for frictionless, mobile-first interaction.",
+      "examples": ["🫁", "🧭 where do we stand?"],
+      "resolution": {
+        "action": "lookup_by_symbol",
+        "targets": ["vocabulary", "patterns"],
+        "pass_remaining_as": "context.raw"
+      }
+    },
+    {
+      "id": "raw_chaos",
+      "type": "implicit_container",
+      "syntax_regex": "^\\[raw\\]:?\\s*([\\s\\S]*)",
+      "description": "Unfiltered emotional or chaotic input that forces the system into an interior processing flow.",
+      "examples": ["[raw] I am so tired and frustrated with this BRD integration..."],
+      "resolution": {
+        "action": "force_verb",
+        "target": "breathe",
+        "pass_remaining_as": "context.raw",
+        "context_override": {
+          "currentMood": "heavy_or_contracted"
+        }
+      }
+    },
+    {
+      "id": "natural_language_fallback",
+      "type": "implicit_intent",
+      "syntax_regex": "^(?!(?:\\/|\\[raw\\]|[🫁🧭🐸🌊✨🗺🏗🤝])).+",
+      "description": "Standard natural language. Requires the adapter's LLM/NLP to classify and map to a pattern or verb.",
+      "examples": ["I need to figure out what to do next.", "Let's map out the people folder."],
+      "resolution": {
+        "action": "delegate_to_llm",
+        "expected_output": "ExecuteVerbInput"
+      }
+    }
+  ]
+}
