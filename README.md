@@ -73,7 +73,7 @@ Because Gratia is an abstract instruction set, you don't need a heavy framework 
 ### 1. Fetch the Vocabulary
 
 ```bash
-npm install @gratiaos/protocol
+npm install @gratiaos/gratia
 ```
 
 Or pull the latest standard directly into your project:
@@ -113,8 +113,8 @@ executeVerb('breathe', { raw: 'I feel completely overwhelmed right now.' });
 For TypeScript projects, import the contract directly:
 
 ```typescript
-import type { ExecuteVerbInput, VerbResult } from '@gratiaos/protocol/adapters/types';
-import vocabulary from '@gratiaos/protocol/vocabulary.json';
+import type { ExecuteVerbInput, VerbResult } from '@gratiaos/gratia/adapters/types';
+import vocabulary from '@gratiaos/gratia/vocabulary.json';
 
 async function executeVerb(verbId: string, context: ExecuteVerbInput['context']): Promise<VerbResult> {
   const verb = vocabulary.verbs.find((v) => v.id === verbId);

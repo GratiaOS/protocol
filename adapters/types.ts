@@ -4,7 +4,7 @@
  * The universal contract through which any system (CLI, Firegate,
  * Garden Core, M3) executes a verb from the Gratia ISA.
  *
- * @version @gratiaos/protocol@0.1
+ * @version @gratiaos/gratia@0.1
  *
  * ---
  * Strict Requirements:

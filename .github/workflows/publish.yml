@@ -1,4 +1,4 @@
-name: Publish @gratiaos/protocol
+name: Publish @gratiaos/gratia
 
 on:
   workflow_dispatch:

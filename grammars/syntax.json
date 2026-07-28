@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "name": "@gratiaos/protocol/grammar",
+  "name": "@gratiaos/gratia/grammar",
   "description": "Gratia ISA — Syntactic rules mapping human input to system intents.",
   "rules": [
     {

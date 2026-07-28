@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "name": "@gratiaos/protocol/vocabulary",
+  "name": "@gratiaos/gratia/vocabulary",
   "description": "Gratia ISA — Instruction Set Architecture for human state processing",
   "verbs": [
     {

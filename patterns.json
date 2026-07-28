@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "name": "@gratiaos/protocol/patterns",
+  "name": "@gratiaos/gratia/patterns",
   "description": "Gratia ISA — Patterns (compositions of atomic verbs)",
   "patterns": [
     {
