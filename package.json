@@ -12,11 +12,11 @@
   ],
   "homepage": "https://gratiaos.dev",
   "bugs": {
-    "url": "https://github.com/gratiaos/protocol/issues"
+    "url": "https://github.com/gratiaos/gratia/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gratiaos/protocol.git"
+    "url": "https://github.com/gratiaos/gratia.git"
   },
   "license": "MPL-2.0",
   "engines": {
