@@ -1,16 +1,16 @@
-# 🌿 Garden Palette
+# Visual Palette
 
-A small, consistent, and composable visual vocabulary for Gratia documentation.
+A small, consistent, and composable visual vocabulary for Product Pack documentation.
 
-The Garden Palette assigns **semantic meaning** to emoji. They identify concepts, document sections, and structural elements—not decoration.
+The palette assigns **semantic meaning** to emoji. They identify concepts, document sections, and structural elements — not decoration.
 
 ## The Fundamental Constraint
 
-> **An emoji has exactly one semantic meaning across the entire Gratia ecosystem. Documents adapt to the emoji—not the other way around.**
+> **An emoji has exactly one semantic meaning across the entire Product Pack. Documents adapt to the emoji — not the other way around.**
 
 This is protocol thinking.
 
-Just as an instruction in an ISA always has the same meaning, every Garden emoji represents exactly one concept everywhere it appears.
+Just as an instruction in an ISA always has the same meaning, every palette emoji represents exactly one concept everywhere it appears.
 
 Consistency creates recognition.
 Recognition reduces cognitive load.
@@ -19,7 +19,7 @@ Recognition reduces cognitive load.
 
 > **Prefer established mental models over novel symbolism. Introduce new symbols only when they communicate something existing conventions cannot.**
 
-Garden defines semantic categories.
+The palette defines semantic categories.
 
 It intentionally does **not** redefine universally understood concepts such as severity, priority, or status.
 
@@ -27,6 +27,28 @@ Those should continue using established conventions (for example: 🔴 Critical,
 
 Semantic novelty is valuable.
 It should be spent carefully.
+
+---
+
+## Rules
+
+### Rule #7 — Search before symbolism
+
+> **An emoji must be discoverable using the words a normal person would naturally type into an emoji picker. If an emoji is difficult to find, it is difficult to reuse — and therefore unsuitable for the pack.**
+
+A good pack must be not just coherent, but easy to use day after day.
+
+Before adopting any emoji, ask:
+
+| Criterion      | Question                                           |
+| -------------- | -------------------------------------------------- |
+| **Semantic**   | Does it express the concept clearly?               |
+| **Universal**  | Is it recognized without explanation?              |
+| **Searchable** | Can you find it easily in the emoji picker?        |
+| **Distinct**   | Does it not confuse with other emojis in the pack? |
+| **Memorable**  | Can you remember it easily?                        |
+
+If an emoji fails at least two criteria, reject it.
 
 ---
 

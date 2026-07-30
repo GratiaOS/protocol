@@ -7,7 +7,7 @@
   "extends": "@gratiaos/gratia",
   "assets": {
     "templates": ["templates/brd.md", "templates/prd.md"],
-    "guides": ["guides/garden-writing.md", "guides/garden-palette.md"]
+    "guides": ["guides/writing.md", "guides/palette.md"]
   },
   "artifacts": ["artifacts/brd.manifest.json", "artifacts/prd.manifest.json"],
   "verbs": {

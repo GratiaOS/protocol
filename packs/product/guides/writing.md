@@ -1,4 +1,4 @@
-# 🌿 Garden Writing Guidelines
+# Writing Guidelines
 
 ## The Fundamental Constraint
 

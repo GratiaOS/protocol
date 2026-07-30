@@ -32,7 +32,7 @@
     "./artifacts/prd.manifest.json": "./artifacts/prd.manifest.json",
     "./templates/brd.md": "./templates/brd.md",
     "./templates/prd.md": "./templates/prd.md",
-    "./guides/garden-writing.md": "./guides/garden-writing.md",
-    "./guides/garden-palette.md": "./guides/garden-palette.md"
+    "./guides/writing.md": "./guides/writing.md",
+    "./guides/palette.md": "./guides/palette.md"
   }
 }
