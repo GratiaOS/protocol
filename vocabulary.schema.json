@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gratiaos.dev/vocabulary/0.1.0.json",
+  "title": "Gratia Vocabulary — Instruction Set Interface",
+  "description": "Atomic verbs for human state processing. Each verb is an ISA opcode — pure intent, no runtime.",
+  "version": "0.1.0",
+  "type": "object",
+  "properties": {
+    "version": { "type": "string" },
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "verbs": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/verb" }
+    },
+    "moods": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "All recognized human states. Used by adapters for auto-detection."
+    }
+  },
+  "$defs": {
+    "verb": {
+      "type": "object",
+      "description": "An atomic verb — a single, deterministic action on human state. This is the ISA definition only.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier. Used in patterns, contraindications, and adapter contracts."
+        },
+        "symbol": {
+          "type": "string",
+          "description": "Single emoji. One meaning, always."
+        },
+        "category": {
+          "type": "string",
+          "enum": ["interior", "exterior", "social"],
+          "description": "Where the action happens. interior = internal state, exterior = output/action, social = between people"
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable name with translations (ES, RO)."
+        },
+        "description": {
+          "type": "string",
+          "description": "What this verb does. Written for both humans and systems."
+        },
+        "effects": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/effect" },
+          "description": "What happens when this verb executes. Adapters MUST apply all effects."
+        },
+        "next_verb_suggestions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Recommended verbs to call after this one. Forms natural verb sequences."
+        },
+        "contraindications": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Verbs that should NOT be called immediately before or after this one."
+        }
+      },
+      "required": ["id", "symbol", "category", "name", "description", "effects"]
+    },
+    "param": {
+      "type": "object",
+      "description": "A single parameter definition. Follows JSON Schema Draft 2020-12.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["string", "number", "boolean", "array", "object"]
+        },
+        "description": {
+          "type": "string",
+          "description": "What this parameter means. Shown to the system as guidance."
+        },
+        "enum": {
+          "type": "array",
+          "description": "Allowed values. Used for constrained parameters."
+        },
+        "default": {
+          "description": "Default value if not provided by the user."
+        },
+        "items": {
+          "$ref": "#/$defs/param",
+          "description": "Schema for array items."
+        }
+      },
+      "required": ["type", "description"]
+    },
+    "effect": {
+      "type": "object",
+      "description": "A single effect that occurs when a verb executes. Adapters MUST apply all declared effects.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["state_change", "signal_emitted", "file_written", "message_shown"],
+          "description": "Type of effect."
+        },
+        "target": {
+          "type": "string",
+          "description": "What is affected. Examples: mood, cognitive_load, energy, workspace"
+        },
+        "from": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Previous state (for state_change effects)."
+        },
+        "to": {
+          "type": "string",
+          "description": "New state (for state_change effects)."
+        },
+        "direction": {
+          "type": "string",
+          "description": "Direction of change (for directional effects like cognitive_load) or new state (for perspective shifts)."
+        },
+        "mark": {
+          "type": "string",
+          "description": "Energy mark emitted (for signal_emitted effects)."
+        },
+        "path": {
+          "type": "string",
+          "description": "File path (for file_written effects)."
+        },
+        "format": {
+          "type": "string",
+          "description": "File format (for file_written effects)."
+        },
+        "message": {
+          "type": "string",
+          "description": "Message to show (for message_shown effects)."
+        }
+      },
+      "required": ["type", "target"]
+    }
+  }
+}

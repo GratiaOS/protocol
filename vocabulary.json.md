@@ -1,6 +1,6 @@
 # Gratia Protocol — Vocabulary
 
-Instruction set for human state processing.
+Instruction set for structured knowledge work.
 Each verb declares the **intent** (what changes), not the implementation (how).
 
 ---
@@ -19,12 +19,6 @@ Each verb declares the **intent** (what changes), not the implementation (how).
     { "type": "state_change", "target": "cognitive_load", "direction": "reduce" },
     { "type": "signal_emitted", "target": "energy", "mark": "calm" }
   ],
-  "adaptations": {
-    "cli": { "message": "Stop everything. 3 deep breaths. In 4, hold 4, out 6.", "duration_seconds": 30 },
-    "firegate": { "action": "ask_gentle_questions", "questions": ["What do you feel in your body right now?", "Where does the tension stop?"] },
-    "garden": { "heartware_state": "CALM", "css_effect": "pulse-slow" },
-    "m3": { "action": "log_emotion", "kind": "calm", "intensity": 0.7 }
-  },
   "next_verb_suggestions": ["orient", "cartography"],
   "contraindications": ["flow"]
 }

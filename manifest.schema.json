@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gratiaos.dev/manifest/0.1.0.json",
+  "title": "Gratia Manifest",
+  "description": "Minimal manifest format for Gratia protocol — describes identity, inheritance, and composition only.",
+  "type": "object",
+  "required": ["name", "version"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema URI for validation"
+    },
+    "name": {
+      "type": "string",
+      "description": "Package or entity name (e.g., @gratiaos/gratia, @gratiaos/pack-product)"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version"
+    },
+    "title": {
+      "type": "string",
+      "description": "Human-readable title"
+    },
+    "description": {
+      "type": "string",
+      "description": "What this entity does"
+    },
+    "extends": {
+      "oneOf": [{ "type": "string" }, { "type": "array", "items": { "type": "string" } }],
+      "description": "Parent manifest(s) to inherit from"
+    },
+    "assets": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "description": "Raw file references grouped by category"
+    },
+    "artifacts": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Paths to artifact manifest files (recursively resolved)"
+    },
+    "verbs": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "description": "Maps verbs to artifact names they produce"
+    }
+  },
+  "additionalProperties": false
+}

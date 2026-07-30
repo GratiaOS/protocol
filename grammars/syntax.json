@@ -46,10 +46,10 @@
       "id": "natural_language_fallback",
       "type": "implicit_intent",
       "syntax_regex": "^(?!(?:\\/|\\[raw\\]|[🫁🧭🐸🌊✨🗺🏗🤝])).+",
-      "description": "Standard natural language. Requires the adapter's LLM/NLP to classify and map to a pattern or verb.",
+      "description": "Standard natural language. Requires the adapter to classify and map to a pattern or verb.",
       "examples": ["I need to figure out what to do next.", "Let's map out the people folder."],
       "resolution": {
-        "action": "delegate_to_llm",
+        "action": "classify_intent",
         "expected_output": "ExecuteVerbInput"
       }
     }

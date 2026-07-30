@@ -1,0 +1,33 @@
+{
+  "name": "@gratiaos/pack-guidelines",
+  "version": "0.2.0",
+  "description": "Shared writing guidelines and garden palette for Gratia documentation — semantic emoji, visual density, scanning-first principles",
+  "keywords": [
+    "gratia",
+    "pack",
+    "guidelines",
+    "writing",
+    "palette",
+    "documentation"
+  ],
+  "homepage": "https://gratiaos.dev",
+  "bugs": {
+    "url": "https://github.com/gratiaos/gratia/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gratiaos/gratia.git",
+    "directory": "packs/guidelines"
+  },
+  "license": "MPL-2.0",
+  "files": [
+    "gratia.manifest.json",
+    "garden-writing.md",
+    "garden-palette.md"
+  ],
+  "exports": {
+    "./gratia.manifest.json": "./gratia.manifest.json",
+    "./garden-writing.md": "./garden-writing.md",
+    "./garden-palette.md": "./garden-palette.md"
+  }
+}

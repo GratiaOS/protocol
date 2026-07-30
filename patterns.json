@@ -1,14 +1,17 @@
 {
   "version": "0.1.0",
   "name": "@gratiaos/gratia/patterns",
-  "description": "Gratia ISA — Patterns (compositions of atomic verbs)",
   "patterns": [
     {
       "id": "clarity",
       "symbol": "✨",
       "name": "Clarity (ES: Claridad, RO: Limpezire)",
       "description": "Transform raw input (emotions, facts, chaos) into structured /collaboration format. Combination: breathe → orient → cartography.",
-      "verbs": ["breathe", "orient", "cartography"],
+      "verbs": [
+        "breathe",
+        "orient",
+        "cartography"
+      ],
       "trigger": "/clarity",
       "input_format": "raw_text",
       "output_format": "structured_collaboration_note",
@@ -16,7 +19,11 @@
         {
           "type": "state_change",
           "target": "mood",
-          "from": ["contracted", "confused", "frustrated"],
+          "from": [
+            "contracted",
+            "confused",
+            "frustrated"
+          ],
           "to": "clarity"
         },
         {
@@ -30,26 +37,6 @@
           "mark": "clarity"
         }
       ],
-      "adaptations": {
-        "cli": {
-          "message": "✨ Clarity: chaos transformed into structure.",
-          "duration_seconds": 120
-        },
-        "firegate": {
-          "action": "process_through_7layer",
-          "steps": [
-            "L1: Detect emotional state from raw input",
-            "L2: Apply breathe (reduce intensity)",
-            "L3: Apply orient (contextualize)",
-            "L4: Apply cartography (structure into collaboration format)"
-          ]
-        },
-        "m3": {
-          "action": "log_emotion",
-          "kind": "clarity",
-          "intensity": 0.85
-        }
-      },
       "example": {
         "input": "Had a heated discussion with counterpart_A about pricing. They say the increase is not ok, but I need to cover costs and actually the root problem is bigger than just price.",
         "output": {
@@ -57,8 +44,16 @@
           "actor": "usr_8f9a2b",
           "counterpart": "usr_2c4d9e",
           "topic": "pricing",
-          "emotions": ["tension", "need", "confusion"],
-          "facts": ["costs need covering", "counterpart disagrees with increase", "root problem > price"],
+          "emotions": [
+            "tension",
+            "need",
+            "confusion"
+          ],
+          "facts": [
+            "costs need covering",
+            "counterpart disagrees with increase",
+            "root problem > price"
+          ],
           "structure": "raw_emotions → structured_analysis"
         }
       }
@@ -68,7 +63,11 @@
       "symbol": "🌊",
       "name": "Calm (ES: Calma, RO: Calmare)",
       "description": "Reduce emotional intensity. Combination: breathe → breathe → orient.",
-      "verbs": ["breathe", "breathe", "orient"],
+      "verbs": [
+        "breathe",
+        "breathe",
+        "orient"
+      ],
       "trigger": "/calm",
       "input_format": "raw_emotional_text",
       "output_format": "calm_state_reflection",
@@ -76,7 +75,11 @@
         {
           "type": "state_change",
           "target": "mood",
-          "from": ["anxious", "frustrated", "contracted"],
+          "from": [
+            "anxious",
+            "frustrated",
+            "contracted"
+          ],
           "to": "calm"
         },
         {
@@ -89,29 +92,18 @@
           "target": "energy",
           "mark": "calm"
         }
-      ],
-      "adaptations": {
-        "cli": {
-          "message": "🌊 Calm: 6 breaths + repositioning. You are here, you are ok.",
-          "duration_seconds": 90
-        },
-        "garden": {
-          "heartware_state": "CALM",
-          "css_effect": "pulse-slow"
-        },
-        "m3": {
-          "action": "log_emotion",
-          "kind": "calm",
-          "intensity": 0.6
-        }
-      }
+      ]
     },
     {
       "id": "vision",
       "symbol": "🔭",
       "name": "Vision (ES: Visión, RO: Viziune)",
       "description": "Shift perspective and create direction. Combination: jump → orient → cartography.",
-      "verbs": ["jump", "orient", "cartography"],
+      "verbs": [
+        "jump",
+        "orient",
+        "cartography"
+      ],
       "trigger": "/vision",
       "input_format": "blocked_situation",
       "output_format": "strategic_direction",
@@ -119,35 +111,23 @@
         {
           "type": "state_change",
           "target": "mood",
-          "from": ["contracted", "heavy"],
+          "from": [
+            "contracted",
+            "heavy"
+          ],
           "to": "flow"
         },
         {
           "type": "state_change",
           "target": "perspective",
-          "direction": "shifted"
+          "to": "shifted"
         },
         {
           "type": "signal_emitted",
           "target": "energy",
           "mark": "focus"
         }
-      ],
-      "adaptations": {
-        "cli": {
-          "message": "🔭 Vision: from the perspective of 3 years, what is clear now?",
-          "duration_seconds": 180
-        },
-        "firegate": {
-          "action": "reframe_and_map",
-          "steps": ["L4: Apply jump (shift the frame)", "L3: Apply orient (reposition in new frame)", "L5: Create strategic map"]
-        },
-        "m3": {
-          "action": "log_emotion",
-          "kind": "focus",
-          "intensity": 0.8
-        }
-      }
+      ]
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://gratiaos.dev/manifest/0.1.0.json",
+  "name": "@gratiaos/gratia",
+  "version": "0.1.0",
+  "title": "Gratia Protocol",
+  "description": "ISA for human state processing. Atomic verbs that move people between states of understanding.",
+  "verbs": {
+    "breathe": {
+      "description": "Pause and center before action",
+      "icon": "🫁"
+    },
+    "orient": {
+      "description": "Map the terrain before committing",
+      "icon": "🧭"
+    },
+    "jump": {
+      "description": "Commit to a direction and learn by doing",
+      "icon": "🐸"
+    }
+  }
+}

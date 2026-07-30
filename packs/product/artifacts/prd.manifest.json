@@ -1,0 +1,8 @@
+{
+  "$schema": "https://gratiaos.dev/manifest/0.1.0.json",
+  "name": "prd",
+  "title": "Product Requirements Document",
+  "description": "Documents the HOW — the product solution from the merchant's perspective.",
+  "template": "templates/prd.md",
+  "guides": ["guides/garden-writing.md", "guides/garden-palette.md"]
+}

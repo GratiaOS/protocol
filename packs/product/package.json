@@ -1,0 +1,38 @@
+{
+  "name": "@gratiaos/pack-product",
+  "version": "0.2.0",
+  "description": "Product domain pack for Gratia protocol — BRD, PRD templates and writing guides",
+  "keywords": [
+    "gratia",
+    "pack",
+    "product",
+    "brd",
+    "prd",
+    "domain"
+  ],
+  "homepage": "https://gratiaos.dev",
+  "bugs": {
+    "url": "https://github.com/gratiaos/gratia/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gratiaos/gratia.git",
+    "directory": "packs/product"
+  },
+  "license": "MPL-2.0",
+  "files": [
+    "gratia.manifest.json",
+    "artifacts/",
+    "templates/",
+    "guides/"
+  ],
+  "exports": {
+    "./gratia.manifest.json": "./gratia.manifest.json",
+    "./artifacts/brd.manifest.json": "./artifacts/brd.manifest.json",
+    "./artifacts/prd.manifest.json": "./artifacts/prd.manifest.json",
+    "./templates/brd.md": "./templates/brd.md",
+    "./templates/prd.md": "./templates/prd.md",
+    "./guides/garden-writing.md": "./guides/garden-writing.md",
+    "./guides/garden-palette.md": "./guides/garden-palette.md"
+  }
+}

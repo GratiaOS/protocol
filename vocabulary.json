@@ -1,7 +1,9 @@
 {
+  "$schema": "./vocabulary.schema.json",
   "version": "0.1.0",
   "name": "@gratiaos/gratia/vocabulary",
-  "description": "Gratia ISA — Instruction Set Architecture for human state processing",
+  "description": "Gratia ISA — Instruction Set Architecture for human state processing. Pure intent, no runtime.",
+  "moods": ["contracted", "open", "flow", "heavy", "calm", "clarity", "gratitude", "joy", "confused", "frustrated"],
   "verbs": [
     {
       "id": "breathe",
@@ -27,25 +29,6 @@
           "mark": "calm"
         }
       ],
-      "adaptations": {
-        "cli": {
-          "message": "Stop everything. 3 deep breaths. In 4, hold 4, out 6.",
-          "duration_seconds": 30
-        },
-        "firegate": {
-          "action": "ask_gentle_questions",
-          "questions": ["What do you feel in your body right now?", "Where does the tension stop?"]
-        },
-        "garden": {
-          "heartware_state": "CALM",
-          "css_effect": "pulse-slow"
-        },
-        "m3": {
-          "action": "log_emotion",
-          "kind": "calm",
-          "intensity": 0.7
-        }
-      },
       "next_verb_suggestions": ["orient", "cartography"],
       "contraindications": ["flow"]
     },
@@ -74,25 +57,6 @@
           "to": "open"
         }
       ],
-      "adaptations": {
-        "cli": {
-          "message": "Stop. Where are you? What time is it? What cycle are you in right now?",
-          "duration_seconds": 45
-        },
-        "firegate": {
-          "action": "contextualize",
-          "questions": ["What is happening right now?", "What preceded this moment?", "What comes next?"]
-        },
-        "garden": {
-          "heartware_state": "OPEN",
-          "css_effect": "focus-in"
-        },
-        "m3": {
-          "action": "log_emotion",
-          "kind": "clarity",
-          "intensity": 0.8
-        }
-      },
       "next_verb_suggestions": ["cartography", "crystallize"],
       "contraindications": []
     },
@@ -120,25 +84,6 @@
           "direction": "shifted"
         }
       ],
-      "adaptations": {
-        "cli": {
-          "message": "If you looked at this from the perspective of 3 years from now, what would look different?",
-          "duration_seconds": 60
-        },
-        "firegate": {
-          "action": "reframe",
-          "questions": ["What would a stranger say about your situation?", "If you didn't have this problem, what would you be doing instead?"]
-        },
-        "garden": {
-          "heartware_state": "VORTEX",
-          "css_effect": "rotate-slow"
-        },
-        "m3": {
-          "action": "log_emotion",
-          "kind": "focus",
-          "intensity": 0.75
-        }
-      },
       "next_verb_suggestions": ["cartography", "bridge"],
       "contraindications": ["calm"]
     }

@@ -1,0 +1,8 @@
+{
+  "$schema": "https://gratiaos.dev/manifest/0.1.0.json",
+  "name": "brd",
+  "title": "Business Requirements Document",
+  "description": "Documents the WHAT — the business problem and desired outcome.",
+  "template": "templates/brd.md",
+  "guides": ["guides/garden-writing.md", "guides/garden-palette.md"]
+}
