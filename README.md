@@ -1,4 +1,4 @@
-# Gratia 🐸
+# Gratia
 
 An instruction set architecture for structured knowledge work.
 

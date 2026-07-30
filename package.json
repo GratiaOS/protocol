@@ -1,6 +1,6 @@
 {
   "name": "@gratiaos/gratia",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Gratia is an open protocol for structured knowledge work",
   "keywords": [
     "gratia",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gratiaos/gratia.git"
+    "url": "git+https://github.com/gratiaos/gratia.git"
   },
   "license": "MPL-2.0",
   "engines": {
@@ -37,6 +37,8 @@
       "import": "./adapters/types.ts"
     },
     "./vocabulary.json": "./vocabulary.json",
-    "./patterns.json": "./patterns.json"
+    "./patterns.json": "./patterns.json",
+    "./manifest.schema.json": "./manifest.schema.json",
+    "./vocabulary.schema.json": "./vocabulary.schema.json"
   }
 }
