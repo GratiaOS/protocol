@@ -1,44 +1,27 @@
 {
-  "name": "@gratiaos/gratia",
-  "version": "0.2.1",
-  "description": "Gratia is an open protocol for structured knowledge work",
+  "name": "@gratiaos/protocol",
+  "version": "0.1.0",
+  "description": "A tiny protocol for portable human–AI collaboration.",
   "keywords": [
     "gratia",
     "protocol",
-    "human-state",
-    "verb",
-    "adapter",
-    "isa"
+    "human-ai",
+    "collaboration"
   ],
   "homepage": "https://gratiaos.dev",
   "bugs": {
-    "url": "https://github.com/gratiaos/gratia/issues"
+    "url": "https://github.com/GratiaOS/protocol/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gratiaos/gratia.git"
+    "url": "git+https://github.com/GratiaOS/protocol.git"
   },
   "license": "MPL-2.0",
-  "engines": {
-    "node": ">=18"
-  },
   "files": [
-    "vocabulary.json",
-    "patterns.json",
-    "gratia.manifest.json",
-    "manifest.schema.json",
-    "vocabulary.schema.json",
-    "adapters/types.ts"
+    "protocol.json",
+    "system-prompt.md"
   ],
-  "types": "adapters/types.ts",
   "exports": {
-    ".": {
-      "types": "./adapters/types.ts",
-      "import": "./adapters/types.ts"
-    },
-    "./vocabulary.json": "./vocabulary.json",
-    "./patterns.json": "./patterns.json",
-    "./manifest.schema.json": "./manifest.schema.json",
-    "./vocabulary.schema.json": "./vocabulary.schema.json"
+    ".": "./protocol.json"
   }
 }

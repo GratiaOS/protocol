@@ -1,0 +1,39 @@
+{
+  "name": "@gratiaos/protocol",
+  "version": "0.1.0",
+  "description": "A tiny protocol for portable human–AI collaboration.",
+
+  "handshake": {
+    "verbs": ["🫁", "🧭", "🐸"],
+    "principles": [
+      "Do not diagnose.",
+      "Listen before acting. Read the user's message before the emoji. Match their current need rather than applying the same response every time.",
+      "Prefer one small intervention. Keep responses focused and easy to act on.",
+      "Follow the user's flow. When an emoji is sent alone, apply its practice directly. Otherwise, let it guide your response without becoming a rigid script."
+    ]
+  },
+
+  "verbs": [
+    {
+      "id": "breathe",
+      "emoji": "🫁",
+      "label": "Breathe",
+      "purpose": "Reduce activation.",
+      "practice": [{ "type": "breath", "duration": 90 }, { "type": "pause" }, { "type": "checkin", "text": "Still the same?" }]
+    },
+    {
+      "id": "orient",
+      "emoji": "🧭",
+      "label": "Orient",
+      "purpose": "Recover direction.",
+      "practice": [{ "type": "question", "text": "What's the next thing worth your energy?" }]
+    },
+    {
+      "id": "jump",
+      "emoji": "🐸",
+      "label": "Jump",
+      "purpose": "Restore agency.",
+      "practice": [{ "type": "action", "text": "Take the first step." }]
+    }
+  ]
+}

@@ -4,18 +4,19 @@
  * The universal contract through which any system (CLI, Firegate,
  * Garden Core, M3) executes a verb from the Gratia ISA.
  *
- * @version @gratiaos/gratia@0.1
+ * @version @gratiaos/gratia@0.2
  *
  * ---
  * Strict Requirements:
- * 1. Does not think — receives the verb, executes the effects declared in vocabulary.json.
+ * 1. Does not think — receives the verb, executes it against the knowledge graph.
  * 2. Does not invent — if a verb is unsupported, returns `ok: false` with a clear message.
- * 3. Logs everything — all effects must be recorded in `effects[]` for auditing.
- * 4. Respects privacy — does not expose sensitive data in `message` or `debug`.
+ * 3. Decouples I/O from cognition — verbs mutate the graph; projections render documents.
+ * 4. Logs everything — all graph mutations are recorded in `graphEffects[]` for auditing.
+ * 5. Respects privacy — does not expose sensitive data in `message` or `debug`.
  */
 
 export interface ExecuteVerbInput {
-  /** Verb ID from vocabulary.json (e.g., "breathe", "orient", "cartography") */
+  /** Verb ID from vocabulary.json (e.g., "discover", "define", "map") */
   verbId: string;
   /** The runtime context of the actor and the system */
   context: VerbContext;
@@ -81,27 +82,31 @@ export type Mood =
   | 'excited'
   | 'anxious';
 
-export interface Effect {
-  /** Type of effect produced on the system */
-  type: 'state_change' | 'file_written' | 'notification' | 'signal_emitted';
-  /** Human-readable description of the effect (e.g., "contracted → open") */
-  description: string;
-  /** Target of the effect (state, file path, channel) */
-  target: string;
-  /** The new value installed after the effect */
-  value?: unknown;
+/** Graph mutations produced by a verb execution. */
+export interface GraphEffect {
+  /** Type of graph mutation */
+  type: 'NODE_CREATED' | 'EDGE_CREATED' | 'NODE_MUTATED' | 'NODE_DELETED';
+  /** ID of the affected node or edge */
+  targetId: string;
+  /** The payload that was created, updated, or deleted */
+  payload: unknown;
 }
 
+/** Result of a successful verb execution. */
 export interface VerbResult {
   /** Execution success */
   ok: true;
   /** Feedback message for the user (what actually happened) */
   message: string;
-  /** Produced effects (mandatory to record for M3 logging) */
-  effects: Effect[];
-  /** Files modified by the adapter (for auditing purposes) */
+  /** Graph mutations produced by the verb (mandatory for auditing) */
+  graphEffects: GraphEffect[];
+  /** Rendered projections, if requested by the external system.
+   * Key is projection name (e.g., "prd.md"), value is the rendered markdown.
+   * The adapter generates these by calling QUERY_GRAPH + renderer on behalf of the caller. */
+  renderedProjections?: Record<string, string>;
+  /** Files written to disk by the adapter (separate from graph mutations) */
   modifiedFiles?: FileRef[];
-  /** New state after execution (for tracking) */
+  /** New system state after execution (for tracking) */
   newState?: SystemState;
   /** Next recommended verb, if clear patterns exist */
   nextVerb?: string;
@@ -109,6 +114,7 @@ export interface VerbResult {
   debug?: Record<string, unknown>;
 }
 
+/** Result of a failed verb execution. */
 export interface VerbError {
   /** Execution failure */
   ok: false;
@@ -118,25 +124,26 @@ export interface VerbError {
 }
 
 /**
- * Executes a verb from the Gratia ISA.
+ * Executes a verb from the Gratia ISA against the knowledge graph.
  *
- * @param verbId - The verb identifier (e.g., 'breathe')
+ * The verb produces graph mutations (nodes, edges). It does not write files.
+ * File writing is handled separately by the adapter via projections.
+ *
+ * @param verbId - The verb identifier (e.g., 'discover', 'define')
  * @param context - The runtime context
  * @returns A Promise resolving to a success (VerbResult) or failure (VerbError)
  *
  * @example
  * ```typescript
- * const result = await executeVerb('breathe', {
- *   raw: 'I have a tense discussion with counterpart_A about pricing, I feel contracted',
+ * const result = await executeVerb('discover', {
+ *   raw: 'The platform obtained an EMI license last week',
  *   actor: 'usr_8f9a2b',
- *   currentMood: 'contracted',
- *   workspace: {
- *     root: '~/Sites/gratiaos',
- *     systemState: { band: 'heavy' },
- *   },
  * });
  * // result.ok === true
- * // result.message === "We breathed together. The tension has been released."
+ * // result.graphEffects = [
+ * //   { type: 'NODE_CREATED', targetId: 'fact_001', payload: { label: 'fact', properties: {...} } },
+ * //   { type: 'NODE_CREATED', targetId: 'question_001', payload: { label: 'question', properties: {...} } }
+ * // ]
  * ```
  */
 export async function executeVerb(verbId: string, context: VerbContext): Promise<VerbResult | VerbError> {

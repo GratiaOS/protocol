@@ -1,90 +1,173 @@
-# Gratia
+# @gratiaos/protocol
 
-An instruction set architecture for structured knowledge work.
+A tiny protocol for keeping AI conversations consistent across ChatGPT, Claude, Gemini, and beyond.
 
-## Quick Start
+Instead of teaching every assistant your preferred interaction style from scratch, define it once and reuse it everywhere.
 
-### 1. Install the vocabulary
+## Why?
 
-```bash
-npm install @gratiaos/gratia
+Every AI conversation starts with the same problem.
+
+You explain how you think to ChatGPT.
+Then you explain it again to Claude.
+Then again to Gemini.
+
+Each assistant starts from zero.
+
+`@gratiaos/protocol` gives them a shared collaboration language.
+
+## The protocol
+
+The protocol defines three interaction modes.
+
+| Mode        | Emoji | Purpose                             |
+| ----------- | ----- | ----------------------------------- |
+| **Breathe** | 🫁    | Reduce activation and create space. |
+| **Orient**  | 🧭    | Recover clarity and direction.      |
+| **Jump**    | 🐸    | Restore agency through action.      |
+
+```
+🫁 Calm me.
+🧭 Help me orient.
+🐸 Help me act.
 ```
 
-### 2. Read a verb
+That's the entire interaction language.
 
-```javascript
-import vocabulary from '@gratiaos/gratia/vocabulary.json';
+When an AI understands the protocol, these three symbols are enough to switch collaboration modes.
 
-const breathe = vocabulary.verbs.find((v) => v.id === 'breathe');
-console.log(breathe.description);
-// → "Return to the body through conscious breathing. Reduces cognitive load and brings attention back to the present."
-```
+## Getting started
 
-### 3. Implement an adapter
+1. Copy `system-prompt.md`
+2. Open your AI's instructions or custom prompts settings
+3. Paste the protocol contents
+4. Start using 🫁 🧭 🐸 during conversations
 
-```typescript
-import type { ExecuteVerbInput } from '@gratiaos/gratia/adapters/types';
+| AI          | Where to paste                                                       |
+| ----------- | -------------------------------------------------------------------- |
+| **ChatGPT** | Personalization → Custom Instructions                                |
+| **Claude**  | Personalization → Instructions for Claude (or Personal Instructions) |
+| **Gemini**  | Personal context → Your instructions for Gemini → Add                |
 
-async function executeVerb(input: ExecuteVerbInput) {
-  const verb = vocabulary.verbs.find((v) => v.id === input.verbId);
-  if (!verb) throw new Error(`Unknown verb: ${input.verbId}`);
+For other AI assistants, paste into wherever the platform accepts custom system prompts or instructions. The protocol works anywhere you can define persistent behavior.
 
-  for (const effect of verb.effects) {
-    console.log(`[${effect.type}] ${effect.target} → ${effect.direction || effect.to}`);
+## How it works
+
+The protocol is a single JSON file.
+
+```json
+{
+  "name": "@gratiaos/protocol",
+  "version": "0.1.0",
+  "handshake": {
+    "verbs": ["🫁", "🧭", "🐸"],
+    "principles": [
+      "Do not diagnose.",
+      "Listen before acting. Read the user's message before the emoji. Match their current need rather than applying the same response every time.",
+      "Prefer one small intervention. Keep responses focused and easy to act on.",
+      "Follow the user's flow. When an emoji is sent alone, apply its practice directly. Otherwise, let it guide your response without becoming a rigid script."
+    ]
   }
-
-  return { ok: true, effects: verb.effects };
 }
 ```
 
-## Core Concepts
+The handshake defines:
 
-| Concept         | What it is                       | Where                          |
-| --------------- | -------------------------------- | ------------------------------ |
-| **Vocabulary**  | Atomic verbs (ISA)               | `vocabulary.json`              |
-| **Manifest**    | Protocol identity + domain packs | `gratia.manifest.json`         |
-| **Domain Pack** | Verbs mapped to artifacts        | `packs/*/gratia.manifest.json` |
-| **Adapter**     | Runtime execution contract       | `adapters/`                    |
+- the available collaboration modes
+- the principles every assistant should follow
+- the expected behavior for each interaction
 
-## Repository Structure
+Everything else is implementation.
+
+## The collaboration modes
+
+### 🫁 Breathe
+
+**Purpose**
+
+Reduce activation.
+
+**Practice**
+
+Guide a brief breathing pause, then check in.
+
+---
+
+### 🧭 Orient
+
+**Purpose**
+
+Recover clarity.
+
+**Practice**
+
+Help map the current situation before proposing solutions.
+
+---
+
+### 🐸 Jump
+
+**Purpose**
+
+Restore agency.
+
+**Practice**
+
+Suggest one concrete next action.
+
+## Design principles
+
+The protocol intentionally stays small.
+
+- One file
+- Three interaction modes
+- Four guiding principles
+- No runtime
+- No dependencies
+- Platform independent
+
+Its goal is not to replace prompts.
+
+Its goal is to give humans and AI assistants a shared interaction language.
+
+## For developers
+
+Install:
+
+```bash
+npm install @gratiaos/protocol
+```
+
+```javascript
+import protocol from '@gratiaos/protocol';
+
+console.log(protocol.handshake.verbs);
+console.log(protocol.handshake.principles);
+```
+
+Or fetch the latest version directly:
+
+```bash
+curl https://gratiaos.dev/protocol.json
+```
+
+## Repository
 
 ```
-gratia/
-├── vocabulary.json              # ISA — atomic verbs
-├── gratia.manifest.json         # Protocol identity
-├── manifest.schema.json         # Schema for all manifests
-├── adapters/                    # Runtime execution contracts
-│   └── types.ts                 # ExecuteVerb() interface
-├── packs/                       # Domain packs
-│   └── product/                 # Product documentation pack
-├── WHY.md                       # Why this exists
-├── ARCHITECTURE.md              # How it's built
-└── PHILOSOPHY.md                # Design principles
+protocol/
+├── protocol.json
+├── system-prompt.md
+├── package.json
+├── LICENSE
+└── archive/
 ```
 
-## Links
+`protocol.json` is the source of truth.
 
-- [WHY](./WHY.md) — Why Gratia exists
-- [ARCHITECTURE](./ARCHITECTURE.md) — Layer separation and data flow
-- [PHILOSOPHY](./PHILOSOPHY.md) — Design principles and tradeoffs
-- [Vocabulary Reference](./vocabulary.json.md) — Human-readable verb definitions
+The `archive/` directory contains earlier explorations that eventually led to the current protocol.
 
-## Contributing
+## Learn more
 
-New verbs are welcome. Each proposal should include:
-
-- Semantic intent
-- Expected state transition
-- Effects
-- Contraindications
-- Possible adapters
-- Recommended follow-up verbs
-
-The goal is to evolve the language carefully while keeping the protocol small, composable, and implementation-independent.
-
-## Vision
-
-Computers standardized computation.  
-Networks standardized communication.  
-Git standardized collaboration.  
-Gratia aims to standardize structured knowledge work.
+- `protocol.json` — the protocol specification
+- `system-prompt.md` — ready-to-use system prompt for ChatGPT, Claude, Gemini
+- `gratiaos.dev/protocol` — documentation and examples
