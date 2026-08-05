@@ -38,7 +38,7 @@ When an AI understands the protocol, these three symbols are enough to switch co
 
 ## Getting started
 
-1. Copy `system-prompt.md`
+1. Click [**Copy system prompt**](https://gratiaos.dev) (one click, no copy-paste)
 2. Open your AI's instructions or custom prompts settings
 3. Paste the protocol contents
 4. Start using 🫁 🧭 🐸 during conversations
