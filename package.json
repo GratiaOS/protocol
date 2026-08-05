@@ -21,6 +21,9 @@
     "protocol.json",
     "system-prompt.md"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     ".": "./protocol.json"
   }
