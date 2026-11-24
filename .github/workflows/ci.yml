@@ -1,0 +1,27 @@
+name: CI
+
+# Every pull request, and every push to main, is checked. Nothing here publishes.
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate the protocol
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22.18.0'
+
+      - run: node scripts/validate.mjs
