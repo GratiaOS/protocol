@@ -34,12 +34,8 @@ const packed = (Array.isArray(out) ? out[0] : Object.values(out)[0]).files.map((
 const expected = ['LICENSE', 'README.md', 'package.json', 'protocol.json', 'system-prompt.md'];
 check(JSON.stringify(packed) === JSON.stringify(expected), `the package would carry [${packed.join(', ')}], expected [${expected.join(', ')}]`);
 
-// A release is a tag, and the tag is the version.
-const tag = process.env.RELEASE_TAG;
-if (tag) check(tag === `v${pkg.version}`, `the tag is ${tag} but package.json is ${pkg.version}`);
-
 if (problems.length) {
   console.error(problems.map((p) => `✗ ${p}`).join('\n'));
   process.exit(1);
 }
-console.log(`✓ ${pkg.name} ${pkg.version}: ${protocol.handshake.principles.length} principles, ${protocol.verbs.length} modes, system-prompt ${prompt.length}/1500, ${packed.length} files${tag ? `, tag ${tag}` : ''}`);
+console.log(`✓ ${pkg.name} ${pkg.version}: ${protocol.handshake.principles.length} principles, ${protocol.verbs.length} modes, system-prompt ${prompt.length}/1500, ${packed.length} files`);

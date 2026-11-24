@@ -1,13 +1,14 @@
 name: Publish
 
-# A release is a tag. Pushing a tag like v0.1.1 publishes that version to npm; a merge to main never does.
-# There is no NPM_TOKEN: npm trusts this repository and this file name (Trusted Publishing, OIDC), once it is set
-# per package on npmjs.com (RELEASING.md). Do not rename this file without changing it there too.
+# A merge to main publishes when, and only when, the version in package.json is not on npm yet: the bump of the version, in a pull
+# request, is the word. A merge that leaves the version as it is publishes nothing.
+# There is no NPM_TOKEN: npm trusts this repository and this file name (Trusted Publishing, OIDC), once it is set per package on
+# npmjs.com (RELEASING.md). Do not rename this file without changing it there too.
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - main
 
 permissions: {}
 
@@ -15,13 +16,49 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  publish:
-    name: Publish to npm (Trusted Publishing / OIDC)
+  check:
+    name: Is this version new?
     runs-on: ubuntu-latest
-    # An environment called "npm" may ask a person to approve each release (Settings → Environments); without it the tag alone is the word.
-    environment: npm
     permissions:
       contents: read
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      publish: ${{ steps.version.outputs.publish }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22.18.0'
+
+      - name: Validate
+        run: node scripts/validate.mjs
+
+      - name: Compare with npm
+        id: version
+        run: |
+          name=$(node -p "require('./package.json').name")
+          version=$(node -p "require('./package.json').version")
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          if npm view "$name@$version" version --registry https://registry.npmjs.org/ >/dev/null 2>&1; then
+            echo "$name@$version is on npm already: nothing to publish."
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "$name@$version is new."
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  publish:
+    name: Publish to npm (Trusted Publishing / OIDC)
+    needs: check
+    if: needs.check.outputs.publish == 'true'
+    runs-on: ubuntu-latest
+    # An environment called "npm" may ask a person to approve each release (Settings → Environments); it is only asked when a version is new.
+    environment: npm
+    permissions:
+      contents: write
       id-token: write
     steps:
       - uses: actions/checkout@v7
@@ -36,10 +73,12 @@ jobs:
       - name: Ensure npm >=11.5.1 (required for Trusted Publishing)
         run: sudo npm install -g npm@^11.5.1
 
-      - name: Validate, and check that the tag is the version
-        run: node scripts/validate.mjs
-        env:
-          RELEASE_TAG: ${{ github.ref_name }}
-
       - name: Publish
         run: npm publish --provenance --access public
+
+      # After the publish, the version is written down: a tag and a release on GitHub.
+      - name: Tag the release
+        run: gh release create "v${VERSION}" --title "v${VERSION}" --generate-notes --target "${GITHUB_SHA}"
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ needs.check.outputs.version }}
