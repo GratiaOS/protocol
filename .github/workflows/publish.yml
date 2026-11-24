@@ -9,6 +9,8 @@ on:
   push:
     branches:
       - main
+  # A run can be started by hand (Actions → Publish → Run workflow): the retry of a version that did not get published, without a commit.
+  workflow_dispatch:
 
 permissions: {}
 
@@ -73,8 +75,11 @@ jobs:
       - name: Ensure npm >=11.5.1 (required for Trusted Publishing)
         run: sudo npm install -g npm@^11.5.1
 
+      # Verbose, so that when npm cannot swap this run's OIDC token for a publish token, the log says why (the default is silence, then a 404).
       - name: Publish
         run: npm publish --provenance --access public
+        env:
+          NPM_CONFIG_LOGLEVEL: verbose
 
       # After the publish, the version is written down: a tag and a release on GitHub.
       - name: Tag the release
