@@ -1,18 +1,18 @@
 # @gratiaos/protocol
 
-A tiny protocol for keeping AI conversations consistent across ChatGPT, Claude, Gemini, and beyond.
+A tiny protocol for keeping conversations with your companion consistent across ChatGPT, Claude, Gemini, and beyond.
 
-Instead of teaching every assistant your preferred interaction style from scratch, define it once and reuse it everywhere.
+Instead of teaching every companion your preferred interaction style from scratch, define it once and reuse it everywhere.
 
 ## Why?
 
-Every AI conversation starts with the same problem.
+Every conversation with a companion starts with the same problem.
 
 You explain how you think to ChatGPT.
 Then you explain it again to Claude.
 Then again to Gemini.
 
-Each assistant starts from zero.
+Each companion starts from zero.
 
 `@gratiaos/protocol` gives them a shared collaboration language.
 
@@ -34,22 +34,22 @@ The protocol defines three interaction modes.
 
 That's the entire interaction language.
 
-When an AI understands the protocol, these three symbols are enough to switch collaboration modes.
+When a companion understands the protocol, these three symbols are enough to switch collaboration modes.
 
 ## Getting started
 
 1. Open [system-prompt.md](https://raw.githubusercontent.com/GratiaOS/protocol/main/system-prompt.md) and copy the contents
-2. Open your AI's instructions or custom prompts settings
+2. Open your companion's instructions or custom prompts settings
 3. Paste the protocol contents
 4. Start using 🫁 🧭 🐸 during conversations
 
-| AI          | Where to paste                                                       |
+| Companion   | Where to paste                                                       |
 | ----------- | -------------------------------------------------------------------- |
 | **ChatGPT** | Personalization → Custom Instructions                                |
 | **Claude**  | Personalization → Instructions for Claude (or Personal Instructions) |
 | **Gemini**  | Personal context → Your instructions for Gemini → Add                |
 
-For other AI assistants, paste into wherever the platform accepts custom system prompts or instructions. The protocol works anywhere you can define persistent behavior.
+For other companions, paste into wherever the platform accepts custom system prompts or instructions. The protocol works anywhere you can define persistent behavior.
 
 ## How it works
 
@@ -63,9 +63,9 @@ The protocol is a single JSON file.
     "verbs": ["🫁", "🧭", "🐸"],
     "principles": [
       "Do not diagnose.",
-      "Listen before acting. Read the user's message before the emoji. Match their current need rather than applying the same response every time.",
+      "Listen before acting. Read the actor's message before the emoji. Match their current need rather than applying the same response every time.",
       "Prefer one small intervention. Keep responses focused and easy to act on.",
-      "Follow the user's flow. When an emoji is sent alone, apply its practice directly. Otherwise, let it guide your response without becoming a rigid script."
+      "Follow the actor's flow. When an emoji is sent alone, apply its practice directly. Otherwise, let it guide your response without becoming a rigid script."
     ]
   }
 }
@@ -74,7 +74,7 @@ The protocol is a single JSON file.
 The handshake defines:
 
 - the available collaboration modes
-- the principles every assistant should follow
+- the principles every companion should follow
 - the expected behavior for each interaction
 
 Everything else is implementation.
@@ -128,7 +128,7 @@ The protocol intentionally stays small.
 
 Its goal is not to replace prompts.
 
-Its goal is to give humans and AI assistants a shared interaction language.
+Its goal is to give humans and companions a shared interaction language.
 
 ## For developers
 
@@ -151,6 +151,10 @@ Or fetch the latest version directly:
 curl https://gratiaos.dev/protocol.json
 ```
 
+## The words
+
+In what we write we say companion (not chatbot), actor (not user), whisper (not prompt), mirror (not model). The words are in the [glossary](https://github.com/GratiaOS/portal/blob/main/GLOSSARY.md). The settings of the products and the names of files keep the names they have.
+
 ## Repository
 
 ```
@@ -169,5 +173,5 @@ The `archive/` directory contains earlier explorations that eventually led to th
 ## Learn more
 
 - `protocol.json` — the protocol specification
-- `system-prompt.md` — ready-to-use system prompt for ChatGPT, Claude, Gemini
+- `system-prompt.md` — ready-to-use system prompt for ChatGPT, Claude, Gemini (the settings call it a system prompt: it stays the name of the file)
 - `gratiaos.dev/protocol` — documentation and examples
