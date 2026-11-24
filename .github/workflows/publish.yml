@@ -1,0 +1,45 @@
+name: Publish
+
+# A release is a tag. Pushing a tag like v0.1.1 publishes that version to npm; a merge to main never does.
+# There is no NPM_TOKEN: npm trusts this repository and this file name (Trusted Publishing, OIDC), once it is set
+# per package on npmjs.com (RELEASING.md). Do not rename this file without changing it there too.
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  publish:
+    name: Publish to npm (Trusted Publishing / OIDC)
+    runs-on: ubuntu-latest
+    # An environment called "npm" may ask a person to approve each release (Settings → Environments); without it the tag alone is the word.
+    environment: npm
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22.18.0'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Ensure npm >=11.5.1 (required for Trusted Publishing)
+        run: sudo npm install -g npm@^11.5.1
+
+      - name: Validate, and check that the tag is the version
+        run: node scripts/validate.mjs
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+
+      - name: Publish
+        run: npm publish --provenance --access public
