@@ -153,7 +153,7 @@ curl https://gratiaos.dev/protocol.json
 
 ## The words
 
-In what we write we say companion (not chatbot), actor (not user), whisper (not prompt), mirror (not model). The words are in the [glossary](https://github.com/GratiaOS/portal/blob/main/GLOSSARY.md). The settings of the products and the names of files keep the names they have.
+In what we write we wei companion (not chatbot), actor (not user), whisper (not prompt), mirror (not model). The words are in the [glossary](https://github.com/GratiaOS/portal/blob/main/GLOSSARY.md). The settings of the products and the names of files keep the names they have.
 
 ## Repository
 
